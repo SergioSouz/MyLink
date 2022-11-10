@@ -26,7 +26,7 @@ export const Title = styled.Text`
 `;
 
 export const SubTitle = styled.Text`
-   font-size: 20;
+   font-size: 18;
    color: #fff;
    text-align: center;
    padding-bottom: 10%;
@@ -81,6 +81,5 @@ export const ButtonLink = styled.TouchableOpacity`
 
 export const ButtonLinkText = styled.Text`
    font-size: 18px;
-   font-weight: bold;
 
 `;

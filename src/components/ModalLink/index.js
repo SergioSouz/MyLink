@@ -21,17 +21,17 @@ import {
 } from './styles';
 
 
-export function ModalLink({ onClose }) {
+export function ModalLink({ onClose, data }) {
 
    async function copyLink() {
-      await Clipboard.setStringAsync('hello world');
+      await Clipboard.setStringAsync(data.link);
       alert('link copiado com sucesso! ')
    }
 
    async function handleShare() {
       try {
          const result = await Share.share({
-            message: `Link: https://sergioProgramador.com`
+            message: `Link: ${data.link}`
          });
 
          if (result.action === Share.sharedAction) {
@@ -88,7 +88,7 @@ export function ModalLink({ onClose }) {
                <LongUrl
                   numberOfLines={1}
                >
-                  https://sergioProgramador.com
+                  {data.long_url}
                </LongUrl>
 
                <ShortLinkArea
@@ -98,7 +98,7 @@ export function ModalLink({ onClose }) {
                      numberOfLines={1}
                      onPress={copyLink}
                   >
-                     https://bit.ly/sergio
+                     {data.link}
                   </ShortLinkUrl>
 
                   <TouchableOpacity onPress={copyLink}>

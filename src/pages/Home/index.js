@@ -4,7 +4,8 @@ import {
    Keyboard,
    KeyboardAvoidingView,
    Platform,
-   Modal
+   Modal,
+   ActivityIndicator
 } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -13,6 +14,9 @@ import { Feather } from '@expo/vector-icons'
 import { StatusBarPage } from '../../components/StatusBarPage'
 import { Menu } from '../../components/Menu';
 import { ModalLink } from '../../components/ModalLink';
+
+import { api } from '../../services/api'
+import { saveLink } from '../../utils/storeLinks'
 
 import {
    ContainerLogo,
@@ -31,13 +35,39 @@ import {
 
 export function Home() {
 
+   const [data, setData] = useState({});
    const [input, setInput] = useState('');
+   const [loading, setLoading] = useState(false)
    const [modalVisible, setModalVisible] = useState(false)
 
+   async function handleShortLink() {
+      setLoading(true)
+      try {
+         const response = await api.post('/shorten',
+            {
+               long_url: input
+            })
 
-   function handleShortLink() {
-      // alert(`Url copiada: ${input}`)
-      setModalVisible(true)
+         setData(response.data)
+         setModalVisible(true)
+
+
+         // DEU TUDO CERTO PRECISO SALVAR ESSE LINK EM UMA LISTA NESSE STORAGE
+         saveLink('links', response.data)
+
+
+         Keyboard.dismiss()
+         setLoading(false)
+         setInput('')
+
+
+
+      } catch {
+         alert('Ops parece que algo deu errado.')
+         Keyboard.dismiss()
+         setLoading(false)
+         setInput('')
+      }
 
    }
 
@@ -84,7 +114,14 @@ export function Home() {
                   </ContainerInput>
 
                   <ButtonLink onPress={handleShortLink}>
-                     <ButtonLinkText>Gerar Link</ButtonLinkText>
+                     {
+                        loading ? (
+                           <ActivityIndicator size={24} color="#121212" />
+                        ) : (
+                           <ButtonLinkText>Gerar Link</ButtonLinkText>
+                        )
+                     }
+
                   </ButtonLink>
 
                </ContainerContent>
@@ -96,7 +133,10 @@ export function Home() {
                animationType='slide'
             >
                <ModalLink
-                  onClose={() => setModalVisible(false)}
+                  data={data}
+                  onClose={() =>
+                     setModalVisible(false)
+                  }
                />
             </Modal>
 

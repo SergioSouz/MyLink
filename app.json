@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MyLink",
-    "slug": "MyLink",
+    "name": "Meus Links",
+    "slug": "Meus Links",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#132742"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,13 +18,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sergiodev.meuslinks",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#132742"
+      },
+      "package": "com.sergiodev.meuslinks",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -6,9 +6,9 @@
 
 
 ## Dependencias utilizadas 
-
-### Navegação 
-  - navigation Drawer
-
-### Estilos 
+  
+  - react-navigation/native
+  - react-navigation/drawer
   - styled components
+  - expo-clipboard
+  - axios
